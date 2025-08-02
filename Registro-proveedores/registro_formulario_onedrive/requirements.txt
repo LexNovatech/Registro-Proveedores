@@ -1,4 +1,6 @@
 flask
+msal
+requests
+gunicorn
 pandas
 openpyxl
-requests
