@@ -30,7 +30,7 @@ jobs:
           source venv/bin/activate
       
       - name: Install dependencies
-        run: pip install -r registro_formulario_onedrive/requirements.txt
+        run: pip install -r Registro-proveedores/registro_formulario_onedrive/requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
@@ -70,5 +70,6 @@ jobs:
           slot-name: 'Production'
 
           
+
 
 
