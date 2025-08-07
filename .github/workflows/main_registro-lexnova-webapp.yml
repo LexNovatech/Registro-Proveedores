@@ -58,7 +58,7 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_cfa34c08-bf24-4b5d-bc13-31c3a5b: }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_14b73885-0af0-4a68-a472-d7567860b79b }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_CEAA6E1631514DF1A7647055C57BDAD3 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_429BDBAE2AFD47CC81E72D59F9BBD3DD }}
 
@@ -70,6 +70,7 @@ jobs:
           slot-name: 'Production'
 
           
+
 
 
 
