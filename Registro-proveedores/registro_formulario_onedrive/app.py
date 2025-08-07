@@ -2,10 +2,14 @@
 import os
 import msal
 import requests
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
+@app.route("/")
+def home():
+    return render_template("index.html")  # Carga el archivo HTML desde /templates
+   
 # Configuración MSAL
 CLIENT_ID = os.getenv("CLIENT_ID", "TU_CLIENT_ID")
 CLIENT_SECRET = os.getenv("CLIENT_SECRET", "TU_CLIENT_SECRET")
