@@ -68,8 +68,10 @@ jobs:
         with:
           app-name: 'registro-lexnova-webapp'
           slot-name: 'Production'
+          package: 'Registro-proveedores/registro_formulario_onedrive'
 
           
+
 
 
 
