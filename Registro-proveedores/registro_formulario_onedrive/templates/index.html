@@ -1,274 +1,236 @@
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Registro de Empresa • Modelo B</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<title>Registro de Empresa - Paso a Paso</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <style>
-    /* ===== Paleta Modelo B (ajústala a tu marca) ===== */
-    :root{
-      --color-primario:#0d47a1;    /* azul profundo */
-      --color-secundario:#5b9df5;  /* azul claro para degradado */
-      --color-fondo:#f2f5f9;       /* fondo de página */
-      --color-texto:#172029;       /* texto principal */
-      --color-borde:#e1e7ef;       /* bordes suaves */
-    }
+<style>
+:root{
+  --color-primario:#0d47a1;
+  --color-secundario:#5b9df5;
+  --color-fondo:#f2f5f9;
+  --color-texto:#172029;
+  --color-borde:#e1e7ef;
+}
+*,*::before,*::after{ box-sizing:border-box }
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:var(--color-fondo);
+  color:var(--color-texto);
+  padding-top:90px; /* espacio para banner fijo */
+}
 
-    /* Reset suave + tipografía del sistema para iPad/iPhone */
-    *,*::before,*::after{ box-sizing:border-box }
-    html,body{ height:100% }
-    body{
-      margin:0;
-      font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:var(--color-fondo);
-      color:var(--color-texto);
-    }
+/* Banner fijo */
+.hero{
+  position:fixed; top:0; left:0; right:0;
+  background:linear-gradient(135deg,var(--color-primario),var(--color-secundario));
+  color:#fff;
+  padding:20px 0;
+  box-shadow:0 4px 16px rgba(0,0,0,.12);
+  z-index:1000;
+}
+.hero .inner{
+  max-width:980px; margin:0 auto; padding:0 16px;
+  display:flex; align-items:center; gap:14px;
+}
+.brand-logo{
+  width:48px; height:48px; border-radius:10px; object-fit:contain;
+  background:#ffffff1a; padding:6px;
+}
+.hero-title{ margin:0; font-size:1.6rem }
+.hero-sub{ margin:4px 0 0; font-size:.95rem; opacity:.9 }
 
-    /* ===== HERO con banda superior y logo ===== */
-    .hero{
-      background:linear-gradient(135deg,var(--color-primario),var(--color-secundario));
-      color:#fff;
-      padding:24px 16px;
-    }
-    .hero .inner{
-      max-width:980px; margin:0 auto;
-      display:flex; align-items:center; gap:14px;
-    }
-    .brand-logo{
-      width:40px; height:40px; border-radius:10px; object-fit:contain;
-      background:#ffffff1a; padding:6px;
-    }
-    .hero-title{ margin:0; font-size:1.7rem; line-height:1.15 }
-    .hero-sub{ margin:4px 0 0; opacity:.95; font-size:.95rem }
+/* Formulario */
+.wrap{ max-width:980px; margin:24px auto; padding:0 16px }
+.card{
+  background:#fff; border:1px solid var(--color-borde);
+  border-radius:16px; overflow:hidden;
+  box-shadow:0 10px 40px rgba(0,0,0,.08);
+}
+.card-head{ padding:14px 16px; font-weight:700; border-bottom:1px solid var(--color-borde) }
+.card-body{ padding:18px }
+.actions{ display:flex; justify-content:space-between; gap:12px; padding:14px 16px; border-top:1px solid var(--color-borde) }
+.btn{ padding:10px 16px; border-radius:12px; border:1px solid transparent; font-weight:700; cursor:pointer }
+.btn-primary{ background:var(--color-primario); color:#fff }
+.btn-outline{ background:#fff; border:1px solid var(--color-primario); color:var(--color-primario) }
+.btn:disabled{ opacity:.6; cursor:not-allowed }
+label{ display:block; margin-top:10px; font-weight:600; font-size:.95rem }
+input, select, textarea{
+  width:100%; padding:10px; margin-top:4px;
+  border:1px solid var(--color-borde); border-radius:8px; background:#fff; font:inherit;
+}
+input:focus, select:focus, textarea:focus{
+  border-color:var(--color-secundario);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--color-secundario) 22%, transparent);
+}
 
-    /* ===== Contenedor principal ===== */
-    .wrap{ max-width:980px; margin:-36px auto 40px; padding:0 16px }
+/* Pasos */
+.step{ display:none }
+.step.active{ display:block }
+.steps{ display:flex; gap:8px; padding:10px 16px; background:#f8fbff; border-bottom:1px solid var(--color-borde) }
+.step-pill{
+  padding:6px 12px; border-radius:999px; border:1px solid var(--color-borde); font-weight:600; font-size:.9rem;
+}
+.step-pill.active{ background:#e3f2fd; border-color:var(--color-secundario) }
+.step-pill.done{ background:#e8f5e9; border-color:#a5d6a7 }
+</style>
 
-    /* ===== Tarjeta del formulario (Modelo B) ===== */
-    form.model-b{
-      background:#fff; color:var(--color-texto);
-      border:1px solid var(--color-borde);
-      border-radius:16px; overflow:hidden;
-      box-shadow:0 10px 40px rgba(0,0,0,.08);
-    }
-    .card-head{ padding:14px 16px; border-bottom:1px solid var(--color-borde); background:#fff; font-weight:700 }
-    .card-body{ padding:18px }
-    .actions{ display:flex; gap:12px; justify-content:flex-end; padding:14px 16px; border-top:1px solid var(--color-borde); background:#fff }
+<script>
+const ciudadesPorDepartamento = { /* Pega aquí tu objeto original completo */ };
 
-    /* Grid responsive para campos (no cambia tus inputs) */
-    .group{ display:grid; grid-template-columns:1fr; gap:14px }
-    @media (min-width:720px){ .group{ grid-template-columns:1fr 1fr } }
-    .full{ grid-column:1/-1 }
+function actualizarCiudades(){
+  const deptoSelect = document.getElementById("departamento");
+  const ciudadSelect = document.getElementById("ciudad");
+  const depto = deptoSelect.value;
+  const ciudades = ciudadesPorDepartamento[depto] || [];
+  ciudadSelect.innerHTML = "";
+  ciudades.forEach(ciudad => {
+    const option = document.createElement("option");
+    option.value = ciudad;
+    option.textContent = ciudad;
+    ciudadSelect.appendChild(option);
+  });
+}
 
-    /* Estilo “look B” a tus mismos controles */
-    form.model-b label{ display:block; font-weight:600; font-size:.95rem }
-    form.model-b input[type="text"],
-    form.model-b input[type="email"],
-    form.model-b input[type="tel"],
-    form.model-b input[type="number"],
-    form.model-b input[type="date"],
-    form.model-b input[type="file"],
-    form.model-b select,
-    form.model-b textarea{
-      width:100%; padding:12px;
-      margin-top:6px;
-      border:1px solid var(--color-borde);
-      border-radius:10px; background:#fff; font:inherit; outline:none;
-      transition:border-color .15s, box-shadow .15s;
-    }
-    form.model-b input:focus,
-    form.model-b select:focus,
-    form.model-b textarea:focus{
-      border-color:var(--color-secundario);
-      box-shadow:0 0 0 3px color-mix(in srgb, var(--color-secundario) 22%, transparent);
-    }
+/* Manejo de pasos */
+let pasoActual = 0;
+function mostrarPaso(i){
+  const pasos = document.querySelectorAll(".step");
+  const pills = document.querySelectorAll(".step-pill");
+  pasos.forEach((p,idx)=>p.classList.toggle("active", idx===i));
+  pills.forEach((pill,idx)=>{
+    pill.classList.toggle("active", idx===i);
+    pill.classList.toggle("done", idx<i);
+  });
+  document.getElementById("btnAtras").disabled = (i===0);
+  document.getElementById("btnSiguiente").style.display = (i<pasos.length-1)?"inline-block":"none";
+  document.getElementById("btnEnviar").style.display = (i===pasos.length-1)?"inline-block":"none";
+  pasoActual = i;
+}
+function siguientePaso(){
+  const paso = document.querySelectorAll(".step")[pasoActual];
+  const requeridos = paso.querySelectorAll("[required]");
+  for(let el of requeridos){
+    if(!el.checkValidity()){ el.reportValidity(); return; }
+  }
+  if(pasoActual<document.querySelectorAll(".step").length-1) mostrarPaso(pasoActual+1);
+}
+function atrasPaso(){ if(pasoActual>0) mostrarPaso(pasoActual-1); }
+function toggleEnviar(){
+  document.getElementById("btnEnviar").disabled = !document.getElementById("acepta_tyc").checked;
+}
 
-    /* Botones (se aplican por clase, sin tocar tu type="submit") */
-    .btn{ padding:12px 16px; border-radius:12px; border:1px solid transparent; cursor:pointer; font-weight:700 }
-    .btn-primary{ background:var(--color-primario); color:#fff }
-    .btn-outline{ background:#fff; border-color:var(--color-primario); color:var(--color-primario) }
-    .btn:disabled{ opacity:.6; cursor:not-allowed }
-
-    /* Titulares internos como chips de sección */
-    .section-title{
-      font-size:1.05rem; font-weight:800; margin:10px 0;
-      background:#f8fbff; border:1px solid var(--color-borde); padding:10px 12px; border-radius:10px;
-    }
-
-    /* Ocultar el h1 original para no duplicar cabecera (opcional) */
-    .legacy-title{ display:none }
-  </style>
-
-  <!-- ===== Tu JS original (intacto) ===== -->
-  <script>
-    const ciudadesPorDepartamento = {/* … se mantiene tu enorme objeto tal cual … */};
-    function actualizarCiudades() {
-      const deptoSelect = document.getElementById("departamento");
-      const ciudadSelect = document.getElementById("ciudad");
-      const depto = deptoSelect.value;
-      const ciudades = ciudadesPorDepartamento[depto] || [];
-      ciudadSelect.innerHTML = "";
-      ciudades.forEach(ciudad => {
-        const option = document.createElement("option");
-        option.value = ciudad;
-        option.textContent = ciudad;
-        ciudadSelect.appendChild(option);
-      });
-    }
-    window.onload = actualizarCiudades;
-  </script>
+window.onload = function(){
+  actualizarCiudades();
+  mostrarPaso(0);
+  toggleEnviar();
+}
+</script>
 </head>
 <body>
 
-  <!-- ===== HERO con logo y título ===== -->
-  <header class="hero" role="banner">
-    <div class="inner">
-      <!-- Cambia la ruta por tu logo real -->
-      <img src="Dibujo logo sin fondo-color.png" alt="Logo" class="brand-logo">
-      <div>
-        <h1 class="hero-title">Formulario de Registro del Proveedor</h1>
-        <p class="hero-sub">Valida tus datos y adjunta los documentos requeridos</p>
-      </div>
+<header class="hero">
+  <div class="inner">
+    <img src="Dibujo Logo sin fondo-color.png" alt="Logo" class="brand-logo">
+    <div>
+      <h1 class="hero-title">Formulario de Registro del Proveedor</h1>
+      <p class="hero-sub">Valida tus datos y adjunta los documentos requeridos</p>
     </div>
-  </header>
-
-  <div class="wrap">
-    <!-- ===== Tu formulario original, solo agrego class="model-b" y contenedores ===== -->
-    <form class="model-b" action="/registrado" method="post" enctype="multipart/form-data">
-      <div class="card-head">Información Principal</div>
-      <div class="card-body">
-        <!-- h1/h2 originales ocultos para no duplicar (se conserva por si lo usas en JS) -->
-        <h1 class="legacy-title">Formulario de Registro del Proveedor</h1>
-
-        <!-- Sección: Datos de la Empresa -->
-        <div class="section-title">Datos de la Empresa</div>
-        <div class="group">
-          <div class="full">
-            <label>Nombre o Razón Social</label>
-            <input type="text" name="razon_social" required>
-          </div>
-
-          <div>
-            <label>Tipo de Documento</label>
-            <select name="tipo_documento" required>
-              <option value="NIT">NIT</option>
-              <option value="CC">Cédula de Ciudadanía</option>
-              <option value="CE">Cédula de Extranjería</option>
-            </select>
-          </div>
-
-          <div>
-            <label>Número de Documento</label>
-            <input type="text" name="numero_documento" required>
-          </div>
-
-          <div>
-            <label>Departamento</label>
-            <select name="departamento" id="departamento" onchange="actualizarCiudades()" required>
-              <!-- ===== tus opciones originales del select (intactas) ===== -->
-              <!-- (dejé el contenido exactamente como lo tenías) -->
-              <!-- Para ahorrar espacio en este snippet no repito el enorme listado,
-                   pero en tu archivo final deja TODAS las <option> como las pegaste. -->
-            </select>
-          </div>
-
-          <div>
-            <label>Ciudad</label>
-            <select name="ciudad" id="ciudad" required>
-              <!-- idem: mantiene tus options iniciales -->
-            </select>
-          </div>
-
-          <div>
-            <label>Teléfonos</label>
-            <input type="text" name="telefonos">
-          </div>
-
-          <div>
-            <label>Correo Electrónico</label>
-            <input type="email" name="correo">
-          </div>
-
-          <div>
-            <label>Tipo de Empresa</label>
-            <select name="tipo_empresa">
-              <option value="SAS">SAS</option>
-              <option value="SA">SA</option>
-              <option value="LTDA">LTDA</option>
-            </select>
-          </div>
-
-          <div>
-            <label>Fecha de Constitución</label>
-            <input type="date" name="fecha_constitucion">
-          </div>
-
-          <div class="full">
-            <label>Código CIIU Principal</label>
-            <input type="text" name="codigo_ciiu">
-          </div>
-        </div>
-
-        <!-- Sección: Representante Legal -->
-        <div class="section-title" style="margin-top:18px">Datos del Representante Legal</div>
-        <div class="group">
-          <div>
-            <label>Primer Apellido</label>
-            <input type="text" name="primer_apellido">
-          </div>
-          <div>
-            <label>Segundo Apellido</label>
-            <input type="text" name="segundo_apellido">
-          </div>
-          <div class="full">
-            <label>Nombres</label>
-            <input type="text" name="nombres_rl">
-          </div>
-          <div>
-            <label>Tipo de Documento</label>
-            <select name="tipo_documento_rl">
-              <option value="CC">Cédula de Ciudadanía</option>
-              <option value="CE">Cédula de Extranjería</option>
-            </select>
-          </div>
-          <div>
-            <label>Número de Documento</label>
-            <input type="text" name="numero_documento_rl">
-          </div>
-        </div>
-
-        <!-- Sección: Documentos -->
-        <div class="section-title" style="margin-top:18px">Carga de Documentos</div>
-        <div class="group">
-          <div class="full">
-            <label>Cámara de Comercio (máx. 30 días)</label>
-            <input type="file" name="camara_comercio" accept=".pdf,.jpg,.png">
-          </div>
-          <div class="full">
-            <label>Documento de Identificación del Representante Legal</label>
-            <input type="file" name="doc_identidad" accept=".pdf,.jpg,.png">
-          </div>
-          <div class="full">
-            <label>Composición Accionaria</label>
-            <input type="file" name="composicion_accionaria" accept=".pdf,.jpg,.png">
-          </div>
-          <div class="full">
-            <label>RUT (máx. 30 días)</label>
-            <input type="file" name="rut" accept=".pdf,.jpg,.png">
-          </div>
-          <div class="full">
-            <label>Autorización Tratamiento de Datos</label>
-            <input type="file" name="autorizacion_datos" accept=".pdf,.jpg,.png">
-          </div>
-        </div>
-      </div>
-
-      <div class="actions">
-        <button type="reset" class="btn btn-outline">Cancelar</button>
-        <button type="submit" class="btn btn-primary">Registrar Empresa</button>
-      </div>
-    </form>
   </div>
+</header>
+
+<div class="wrap">
+<form class="card" action="/registrado" method="post" enctype="multipart/form-data">
+  <div class="steps">
+    <span class="step-pill active">1. Empresa</span>
+    <span class="step-pill">2. Representante</span>
+    <span class="step-pill">3. Documentos</span>
+    <span class="step-pill">4. Revisión</span>
+  </div>
+
+  <!-- Paso 1 -->
+  <div class="step active">
+    <div class="card-head">Datos de la Empresa</div>
+    <div class="card-body">
+      <label>Nombre o Razón Social</label>
+      <input type="text" name="razon_social" required>
+      <label>Tipo de Documento</label>
+      <select name="tipo_documento" required>
+        <option value="NIT">NIT</option><option value="CC">Cédula de Ciudadanía</option><option value="CE">Cédula de Extranjería</option>
+      </select>
+      <label>Número de Documento</label>
+      <input type="text" name="numero_documento" required>
+      <label>Departamento</label>
+      <select name="departamento" id="departamento" onchange="actualizarCiudades()" required>
+        <!-- tus opciones originales -->
+      </select>
+      <label>Ciudad</label>
+      <select name="ciudad" id="ciudad" required></select>
+      <label>Teléfonos</label>
+      <input type="text" name="telefonos">
+      <label>Correo Electrónico</label>
+      <input type="email" name="correo">
+      <label>Tipo de Empresa</label>
+      <select name="tipo_empresa">
+        <option value="SAS">SAS</option><option value="SA">SA</option><option value="LTDA">LTDA</option>
+      </select>
+      <label>Fecha de Constitución</label>
+      <input type="date" name="fecha_constitucion">
+      <label>Código CIIU Principal</label>
+      <input type="text" name="codigo_ciiu">
+    </div>
+  </div>
+
+  <!-- Paso 2 -->
+  <div class="step">
+    <div class="card-head">Datos del Representante Legal</div>
+    <div class="card-body">
+      <label>Primer Apellido</label><input type="text" name="primer_apellido">
+      <label>Segundo Apellido</label><input type="text" name="segundo_apellido">
+      <label>Nombres</label><input type="text" name="nombres_rl">
+      <label>Tipo de Documento</label>
+      <select name="tipo_documento_rl">
+        <option value="CC">Cédula de Ciudadanía</option><option value="CE">Cédula de Extranjería</option>
+      </select>
+      <label>Número de Documento</label><input type="text" name="numero_documento_rl">
+    </div>
+  </div>
+
+  <!-- Paso 3 -->
+  <div class="step">
+    <div class="card-head">Carga de Documentos</div>
+    <div class="card-body">
+      <label>Cámara de Comercio</label><input type="file" name="camara_comercio" accept=".pdf,.jpg,.png">
+      <label>Documento Identidad Representante</label><input type="file" name="doc_identidad" accept=".pdf,.jpg,.png">
+      <label>Composición Accionaria</label><input type="file" name="composicion_accionaria" accept=".pdf,.jpg,.png">
+      <label>RUT</label><input type="file" name="rut" accept=".pdf,.jpg,.png">
+      <label>Autorización Datos</label><input type="file" name="autorizacion_datos" accept=".pdf,.jpg,.png">
+    </div>
+  </div>
+
+  <!-- Paso 4 -->
+  <div class="step">
+    <div class="card-head">Revisión y Aceptación</div>
+    <div class="card-body">
+      <p>Por favor confirma que toda la información es correcta y acepta los términos y condiciones.</p>
+      <label><input type="checkbox" id="acepta_tyc" onclick="toggleEnviar()"> Acepto los términos y condiciones</label>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button" id="btnAtras" class="btn btn-outline" onclick="atrasPaso()">Atrás</button>
+    <div>
+      <button type="button" id="btnSiguiente" class="btn btn-primary" onclick="siguientePaso()">Siguiente</button>
+      <button type="submit" id="btnEnviar" class="btn btn-primary" style="display:none" disabled>Enviar</button>
+    </div>
+  </div>
+</form>
+</div>
+
 </body>
 </html>
+
