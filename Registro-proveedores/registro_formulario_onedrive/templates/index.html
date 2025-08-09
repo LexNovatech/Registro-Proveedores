@@ -1,236 +1,303 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Registro de Empresa - Paso a Paso</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <title>Registro de Empresa - Paso a Paso</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<style>
-:root{
-  --color-primario:#0d47a1;
-  --color-secundario:#5b9df5;
-  --color-fondo:#f2f5f9;
-  --color-texto:#172029;
-  --color-borde:#e1e7ef;
-}
-*,*::before,*::after{ box-sizing:border-box }
-body{
-  margin:0;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-  background:var(--color-fondo);
-  color:var(--color-texto);
-  padding-top:90px; /* espacio para banner fijo */
-}
+  <style>
+    :root{
+      --color-primario:#0d47a1;
+      --color-secundario:#5b9df5;
+      --color-fondo:#f2f5f9;
+      --color-texto:#172029;
+      --color-borde:#e1e7ef;
+    }
 
-/* Banner fijo */
-.hero{
-  position:fixed; top:0; left:0; right:0;
-  background:linear-gradient(135deg,var(--color-primario),var(--color-secundario));
-  color:#fff;
-  padding:20px 0;
-  box-shadow:0 4px 16px rgba(0,0,0,.12);
-  z-index:1000;
-}
-.hero .inner{
-  max-width:980px; margin:0 auto; padding:0 16px;
-  display:flex; align-items:center; gap:14px;
-}
-.brand-logo{
-  width:48px; height:48px; border-radius:10px; object-fit:contain;
-  background:#ffffff1a; padding:6px;
-}
-.hero-title{ margin:0; font-size:1.6rem }
-.hero-sub{ margin:4px 0 0; font-size:.95rem; opacity:.9 }
+    *,*::before,*::after{ box-sizing:border-box }
+    html,body{ height:100% }
+    body{
+      margin:0;
+      font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:var(--color-fondo);
+      color:var(--color-texto);
+      padding-top:90px; /* espacio para el banner fijo */
+    }
 
-/* Formulario */
-.wrap{ max-width:980px; margin:24px auto; padding:0 16px }
-.card{
-  background:#fff; border:1px solid var(--color-borde);
-  border-radius:16px; overflow:hidden;
-  box-shadow:0 10px 40px rgba(0,0,0,.08);
-}
-.card-head{ padding:14px 16px; font-weight:700; border-bottom:1px solid var(--color-borde) }
-.card-body{ padding:18px }
-.actions{ display:flex; justify-content:space-between; gap:12px; padding:14px 16px; border-top:1px solid var(--color-borde) }
-.btn{ padding:10px 16px; border-radius:12px; border:1px solid transparent; font-weight:700; cursor:pointer }
-.btn-primary{ background:var(--color-primario); color:#fff }
-.btn-outline{ background:#fff; border:1px solid var(--color-primario); color:var(--color-primario) }
-.btn:disabled{ opacity:.6; cursor:not-allowed }
-label{ display:block; margin-top:10px; font-weight:600; font-size:.95rem }
-input, select, textarea{
-  width:100%; padding:10px; margin-top:4px;
-  border:1px solid var(--color-borde); border-radius:8px; background:#fff; font:inherit;
-}
-input:focus, select:focus, textarea:focus{
-  border-color:var(--color-secundario);
-  box-shadow:0 0 0 3px color-mix(in srgb,var(--color-secundario) 22%, transparent);
-}
+    /* ===== Banner fijo independiente ===== */
+    .hero{
+      position:fixed; top:0; left:0; right:0; z-index:1000;
+      background:linear-gradient(135deg,var(--color-primario),var(--color-secundario));
+      color:#fff; padding:16px 0;
+      box-shadow:0 4px 16px rgba(0,0,0,.12);
+    }
+    .hero .inner{
+      max-width:980px; margin:0 auto; padding:0 16px;
+      display:flex; align-items:center; gap:14px;
+    }
+    .brand-logo{ width:48px; height:48px; border-radius:10px; object-fit:contain; background:#ffffff1a; padding:6px }
+    .hero-title{ margin:0; font-size:1.6rem; line-height:1.15 }
+    .hero-sub{ margin:4px 0 0; opacity:.95; font-size:.95rem }
 
-/* Pasos */
-.step{ display:none }
-.step.active{ display:block }
-.steps{ display:flex; gap:8px; padding:10px 16px; background:#f8fbff; border-bottom:1px solid var(--color-borde) }
-.step-pill{
-  padding:6px 12px; border-radius:999px; border:1px solid var(--color-borde); font-weight:600; font-size:.9rem;
-}
-.step-pill.active{ background:#e3f2fd; border-color:var(--color-secundario) }
-.step-pill.done{ background:#e8f5e9; border-color:#a5d6a7 }
-</style>
+    /* ===== Contenedor principal ===== */
+    .wrap{ max-width:980px; margin:24px auto 40px; padding:0 16px }
 
-<script>
-const ciudadesPorDepartamento = { /* Pega aquí tu objeto original completo */ };
+    /* ===== Tarjeta y look Modelo B ===== */
+    .card{
+      background:#fff; border:1px solid var(--color-borde); border-radius:16px; overflow:hidden;
+      box-shadow:0 10px 40px rgba(0,0,0,.08);
+    }
+    .card-head{ padding:14px 16px; border-bottom:1px solid var(--color-borde); background:#fff; font-weight:800 }
+    .card-body{ padding:18px }
+    .actions{ display:flex; gap:12px; justify-content:space-between; padding:14px 16px; border-top:1px solid var(--color-borde); background:#fff; flex-wrap:wrap }
+    .btn{ padding:12px 16px; border-radius:12px; border:1px solid transparent; cursor:pointer; font-weight:700 }
+    .btn-primary{ background:var(--color-primario); color:#fff }
+    .btn-outline{ background:#fff; border-color:var(--color-primario); color:var(--color-primario) }
+    .btn:disabled{ opacity:.6; cursor:not-allowed }
 
-function actualizarCiudades(){
-  const deptoSelect = document.getElementById("departamento");
-  const ciudadSelect = document.getElementById("ciudad");
-  const depto = deptoSelect.value;
-  const ciudades = ciudadesPorDepartamento[depto] || [];
-  ciudadSelect.innerHTML = "";
-  ciudades.forEach(ciudad => {
-    const option = document.createElement("option");
-    option.value = ciudad;
-    option.textContent = ciudad;
-    ciudadSelect.appendChild(option);
-  });
-}
+    label{ display:block; font-weight:600; font-size:.95rem; margin-top:10px }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="date"],
+    input[type="file"],
+    select,
+    textarea{
+      width:100%; padding:12px; margin-top:6px;
+      border:1px solid var(--color-borde); border-radius:10px; background:#fff; font:inherit; outline:none;
+      transition:border-color .15s, box-shadow .15s;
+    }
+    input:focus, select:focus, textarea:focus{
+      border-color:var(--color-secundario);
+      box-shadow:0 0 0 3px color-mix(in srgb, var(--color-secundario) 22%, transparent);
+    }
 
-/* Manejo de pasos */
-let pasoActual = 0;
-function mostrarPaso(i){
-  const pasos = document.querySelectorAll(".step");
-  const pills = document.querySelectorAll(".step-pill");
-  pasos.forEach((p,idx)=>p.classList.toggle("active", idx===i));
-  pills.forEach((pill,idx)=>{
-    pill.classList.toggle("active", idx===i);
-    pill.classList.toggle("done", idx<i);
-  });
-  document.getElementById("btnAtras").disabled = (i===0);
-  document.getElementById("btnSiguiente").style.display = (i<pasos.length-1)?"inline-block":"none";
-  document.getElementById("btnEnviar").style.display = (i===pasos.length-1)?"inline-block":"none";
-  pasoActual = i;
-}
-function siguientePaso(){
-  const paso = document.querySelectorAll(".step")[pasoActual];
-  const requeridos = paso.querySelectorAll("[required]");
-  for(let el of requeridos){
-    if(!el.checkValidity()){ el.reportValidity(); return; }
-  }
-  if(pasoActual<document.querySelectorAll(".step").length-1) mostrarPaso(pasoActual+1);
-}
-function atrasPaso(){ if(pasoActual>0) mostrarPaso(pasoActual-1); }
-function toggleEnviar(){
-  document.getElementById("btnEnviar").disabled = !document.getElementById("acepta_tyc").checked;
-}
+    /* ===== Progreso / pasos ===== */
+    .steps{
+      display:flex; gap:8px; flex-wrap:wrap; padding:12px 16px; background:#f8fbff; border-bottom:1px solid var(--color-borde)
+    }
+    .step-pill{
+      padding:8px 12px; border-radius:999px; border:1px solid var(--color-borde); background:#fff; font-weight:700; font-size:.9rem
+    }
+    .step-pill.active{ background:color-mix(in srgb, var(--color-secundario) 12%, #fff); border-color:var(--color-secundario) }
+    .step-pill.done{ background:#e8f5e9; border-color:#a5d6a7 }
 
-window.onload = function(){
-  actualizarCiudades();
-  mostrarPaso(0);
-  toggleEnviar();
-}
-</script>
+    /* ===== Secciones (módulos) ===== */
+    .step{ display:none }
+    .step.active{ display:block }
+
+    .legacy-title{ display:none }
+    .terms{ display:flex; align-items:flex-start; gap:10px; margin-top:12px }
+    .terms input{ margin-top:4px }
+  </style>
+
+  <!-- ======== JS: ciudades + navegación por pasos ======== -->
+  <script>
+    const ciudadesPorDepartamento = {"AMAZONAS": ["El Encanto", "La Chorrera", "La Pedrera", "La Victoria", "Leticia", "Miriti - Paraná", "Puerto Alegria", "Puerto Arica", "Puerto Nariño", "Puerto Santander", "Tarapacá"], "ANTIOQUIA": ["Cáceres", "Caucasia", "El Bagre", "Nechí", "Tarazá", "Zaragoza", "Caracolí", "Maceo", "Puerto Berrio", "Puerto Nare", "Puerto Triunfo", "Yondó", "Amalfi", "Anorí", "Cisneros", "Remedios", "San Roque", "Santo Domingo", "Segovia", "Vegachí", "Yalí", "Yolombó", "Angostura", "Belmira", "Briceño", "Campamento", "Carolina", "Don Matias", "Entrerrios", "Gómez Plata", "Guadalupe", "Ituango", "San Andrés", "San José De La Montaña", "San Pedro", "Santa Rosa De Osos", "Toledo", "Valdivia", "Yarumal", "Abriaquí", "Anza", "Armenia", "Buriticá", "Cañasgordas", "Dabeiba", "Ebéjico", "Frontino", "Giraldo", "Heliconia", "Liborina", "Olaya", "Peque", "Sabanalarga", "San Jerónimo", "Santafé De Antioquia", "Sopetran", "Uramita", "Abejorral", "Alejandría", "Argelia", "Carmen De Viboral", "Cocorná", "Concepción", "Granada", "Guarne", "Guatape", "La Ceja", "La Unión", "Marinilla", "Nariño", "Peñol", "Retiro", "Rionegro", "San Carlos", "San Francisco", "San Luis", "San Rafael", "San Vicente", "Santuario", "Sonson", "Amaga", "Andes", "Angelopolis", "Betania", "Betulia", "Caicedo", "Caramanta", "Ciudad Bolívar", "Concordia", "Fredonia", "Hispania", "Jardín", "Jericó", "La Pintada", "Montebello", "Pueblorrico", "Salgar", "Santa Barbara", "Támesis", "Tarso", "Titiribí", "Urrao", "Valparaiso", "Venecia", "Apartadó", "Arboletes", "Carepa", "Chigorodó", "Murindó", "Mutata", "Necoclí", "San Juan De Uraba", "San Pedro De Uraba", "Turbo", "Vigía Del Fuerte", "Barbosa", "Bello", "Caldas", "Copacabana", "Envigado", "Girardota", "Itagui", "La Estrella", "Medellín", "Sabaneta"], "ARAUCA": ["Arauca", "Arauquita", "Cravo Norte", "Fortul", "Puerto Rondón", "Saravena", "Tame"], "ARCHIPIELAGO DE SAN ANDRES": ["Providencia Y Santa Catalina", "San Andres"], "ATLÁNTICO": ["Barranquilla", "Galapa", "Malambo", "Puerto Colombia", "Soledad", "Campo De La Cruz", "Candelaria", "Luruaco", "Manati", "Repelon", "Santa Lucia", "Suan", "Baranoa", "Palmar De Varela", "Polonuevo", "Ponedera", "Sabanagrande", "Sabanalarga", "Santo Tomas", "Juan De Acosta", "Piojó", "Tubara", "Usiacuri"], "BOGOTÁ D.C.": ["Bogota D.C."], "BOLIVAR": ["Cicuco", "Hatillo De Loba", "Margarita", "Mompós", "San Fernando", "Talaigua Nuevo", "Arjona", "Arroyohondo", "Calamar", "Cartagena", "Clemencia", "Mahates", "San Cristobal", "San Estanislao", "Santa Catalina", "Santa Rosa De Lima", "Soplaviento", "Turbaco", "Turbana", "Villanueva", "Altos Del Rosario", "Barranco De Loba", "El Peñon", "Regidor", "Río Viejo", "San Martin De Loba", "Arenal", "Cantagallo", "Morales", "San Pablo", "Santa Rosa Del Sur", "Simití", "Achí", "Magangué", "Montecristo", "Pinillos", "San Jacinto Del Cauca", "Tiquisio", "Carmen De Bolívar", "Córdoba", "El Guamo", "María La Baja", "San Jacinto", "San Juan Nepomuceno", "Zambrano"], "BOYACÁ": ["Chíquiza", "Chivatá", "Cómbita", "Cucaita", "Motavita", "Oicatá", "Samacá", "Siachoque", "Sora", "Soracá", "Sotaquirá", "Toca", "Tunja", "Tuta", "Ventaquemada", "Chiscas", "Cubará", "El Cocuy", "El Espino", "Guacamayas", "Güicán", "Panqueba", "Labranzagrande", "Pajarito", "Paya", "Pisba", "Berbeo", "Campohermoso", "Miraflores", "Páez", "San Eduardo", "Zetaquira", "Boyacá", "Ciénega", "Jenesano", "Nuevo Colón", "Ramiriquí", "Rondón", "Tibaná", "Turmequé", "Umbita", "Viracachá", "Chinavita", "Garagoa", "Macanal", "Pachavita", "San Luis De Gaceno", "Santa María", "Boavita", "Covarachía", "La Uvita", "San Mateo", "Sativanorte", "Sativasur", "Soatá", "Susacón", "Tipacoque", "Briceño", "Buenavista", "Caldas", "Chiquinquirá", "Coper", "La Victoria", "Maripí", "Muzo", "Otanche", "Pauna", "Puerto Boyaca", "Quípama", "Saboyá", "San Miguel De Sema", "San Pablo Borbur", "Tununguá", "Almeida", "Chivor", "Guateque", "Guayatá", "La Capilla", "Somondoco", "Sutatenza", "Tenza", "Arcabuco", "Chitaraque", "Gachantivá", "Moniquirá", "Ráquira", "Sáchica", "San José De Pare", "Santa Sofía", "Santana", "Sutamarchán", "Tinjacá", "Togüí", "Villa De Leyva", "Aquitania", "Cuítiva", "Firavitoba", "Gameza", "Iza", "Mongua", "Monguí", "Nobsa", "Pesca", "Sogamoso", "Tibasosa", "Tópaga", "Tota", "Belén", "Busbanzá", "Cerinza", "Corrales", "Duitama", "Floresta", "Paipa", "San Rosa Viterbo", "Tutazá", "Betéitiva", "Chita", "Jericó", "Paz De Río", "Socha", "Socotá", "Tasco"], "CALDAS": ["Filadelfia", "La Merced", "Marmato", "Riosucio", "Supía", "Manzanares", "Marquetalia", "Marulanda", "Pensilvania", "Anserma", "Belalcázar", "Risaralda", "San José", "Viterbo", "Chinchina", "Manizales", "Neira", "Palestina", "Villamaria", "Aguadas", "Aranzazu", "Pácora", "Salamina", "La Dorada", "Norcasia", "Samaná", "Victoria"], "CAQUETA": ["Albania", "Belén De Los Andaquies", "Cartagena Del Chairá", "Currillo", "El Doncello", "El Paujil", "Florencia", "La Montañita", "Milan", "Morelia", "Puerto Rico", "San Jose Del Fragua", "San Vicente Del Caguán", "Solano", "Solita", "Valparaiso"], "CASANARE": ["Aguazul", "Chameza", "Hato Corozal", "La Salina", "Maní", "Monterrey", "Nunchía", "Orocué", "Paz De Ariporo", "Pore", "Recetor", "Sabanalarga", "Sácama", "San Luis De Palenque", "Támara", "Tauramena", "Trinidad", "Villanueva", "Yopal"], "CAUCA": ["Cajibío", "El Tambo", "La Sierra", "Morales", "Piendamo", "Popayán", "Rosas", "Sotara", "Timbio", "Buenos Aires", "Caloto", "Corinto", "Miranda", "Padilla", "Puerto Tejada", "Santander De Quilichao", "Suarez", "Villa Rica", "Guapi", "Lopez", "Timbiqui", "Caldono", "Inzá", "Jambalo", "Paez", "Purace", "Silvia", "Toribio", "Totoro", "Almaguer", "Argelia", "Balboa", "Bolívar", "Florencia", "La Vega", "Mercaderes", "Patia", "Piamonte", "San Sebastian", "Santa Rosa", "Sucre"], "CESAR": ["Becerril", "Chimichagua", "Chiriguana", "Curumaní", "La Jagua De Ibirico", "Pailitas", "Tamalameque", "Astrea", "Bosconia", "El Copey", "El Paso", "Agustín Codazzi", "La Paz", "Manaure", "Pueblo Bello", "San Diego", "Valledupar", "Aguachica", "Gamarra", "González", "La Gloria", "Pelaya", "Río De Oro", "San Alberto", "San Martín"], "CHOCO": ["Atrato", "Bagadó", "Bojaya", "El Carmen De Atrato", "Lloró", "Medio Atrato", "Quibdó", "Rio Quito", "Acandí", "Belén De Bajira", "Carmén Del Darién", "Riosucio", "Unguía", "Bahía Solano", "Juradó", "Nuquí", "Alto Baudó", "Bajo Baudó", "El Litoral Del San Juan", "Medio Baudó", "Canton De San Pablo", "Certegui", "Condoto", "Itsmina", "Medio San Juan", "Nóvita", "Río Frío", "San José Del Palmar", "Sipí", "Tadó", "Union Panamericana"], "CORDOBA": ["Tierralta", "Valencia", "Chimá", "Cotorra", "Lorica", "Momil", "Purísima", "Montería", "Canalete", "Los Córdobas", "Moñitos", "Puerto Escondido", "San Antero", "San Bernardo Del Viento", "Chinú", "Sahagún", "San Andrés Sotavento", "Ayapel", "Buenavista", "La Apartada", "Montelíbano", "Planeta Rica", "Pueblo Nuevo", "Puerto Libertador", "Cereté", "Ciénaga De Oro", "San Carlos", "San Pelayo"], "CUNDINAMARCA": ["Chocontá", "Macheta", "Manta", "Sesquilé", "Suesca", "Tibirita", "Villapinzón", "Agua De Dios", "Girardot", "Guataquí", "Jerusalén", "Nariño", "Nilo", "Ricaurte", "Tocaima", "Caparrapí", "Guaduas", "Puerto Salgar", "Albán", "La Peña", "La Vega", "Nimaima", "Nocaima", "Quebradanegra", "San Francisco", "Sasaima", "Supatá", "Útica", "Vergara", "Villeta", "Gachala", "Gacheta", "Gama", "Guasca", "Guatavita", "Junín", "La Calera", "Ubalá", "Beltrán", "Bituima", "Chaguaní", "Guayabal De Siquima", "Puli", "San Juan De Río Seco", "Vianí", "Medina", "Paratebueno", "Caqueza", "Chipaque", "Choachí", "Fomeque", "Fosca", "Guayabetal", "Gutiérrez", "Quetame", "Ubaque", "Une", "El Peñón", "La Palma", "Pacho", "Paime", "San Cayetano", "Topaipi", "Villagomez", "Yacopí", "Cajicá", "Chía", "Cogua", "Gachancipá", "Nemocon", "Sopó", "Tabio", "Tocancipá", "Zipaquirá", "Bojacá", "Cota", "El Rosal", "Facatativá", "Funza", "Madrid", "Mosquera", "Subachoque", "Tenjo", "Zipacon", "Sibaté", "Soacha", "Arbeláez", "Cabrera", "Fusagasugá", "Granada", "Pandi", "Pasca", "San Bernardo", "Silvania", "Tibacuy", "Venecia", "Anapoima", "Anolaima", "Apulo", "Cachipay", "El Colegio", "La Mesa", "Quipile", "San Antonio De Tequendama", "Tena", "Viotá", "Carmen De Carupa", "Cucunubá", "Fúquene", "Guachetá", "Lenguazaque", "Simijaca", "Susa", "Sutatausa", "Tausa", "Ubate"], "GUAINIA": ["Barranco Mina", "Cacahual", "Inírida", "La Guadalupe", "Mapiripan", "Morichal", "Pana Pana", "Puerto Colombia", "San Felipe"], "GUAVIARE": ["Calamar", "El Retorno", "Miraflores", "San José Del Guaviare"], "HUILA": ["Agrado", "Altamira", "Garzón", "Gigante", "Guadalupe", "Pital", "Suaza", "Tarqui", "Aipe", "Algeciras", "Baraya", "Campoalegre", "Colombia", "Hobo", "Iquira", "Neiva", "Palermo", "Rivera", "Santa María", "Tello", "Teruel", "Villavieja", "Yaguará", "La Argentina", "La Plata", "Nátaga", "Paicol", "Tesalia", "Acevedo", "Elías", "Isnos", "Oporapa", "Palestina", "Pitalito", "Saladoblanco", "San Agustín", "Timaná"], "LA GUAJIRA": ["Albania", "Dibulla", "Maicao", "Manaure", "Riohacha", "Uribia", "Barrancas", "Distraccion", "El Molino", "Fonseca", "Hatonuevo", "La Jagua Del Pilar", "San Juan Del Cesar", "Urumita", "Villanueva"], "MAGDALENA": ["Ariguaní", "Chibolo", "Nueva Granada", "Plato", "Sabanas De San Angel", "Tenerife", "Algarrobo", "Aracataca", "Ciénaga", "El Reten", "Fundacion", "Pueblo Viejo", "Zona Bananera", "Cerro San Antonio", "Concordia", "El Piñon", "Pedraza", "Pivijay", "Remolino", "Salamina", "Sitionuevo", "Zapayan", "Santa Marta", "El Banco", "Guamal", "Pijiño Del Carmen", "San Sebastian De Buenavista", "San Zenon", "Santa Ana", "Santa Barbara De Pinto"], "META": ["El Castillo", "El Dorado", "Fuente De Oro", "Granada", "La Macarena", "La Uribe", "Lejanías", "Mapiripan", "Mesetas", "Puerto Concordia", "Puerto Lleras", "Puerto Rico", "San Juan De Arama", "Vista Hermosa", "Villavicencio", "Acacias", "Barranca De Upia", "Castilla La Nueva", "Cumaral", "El Calvario", "Guamal", "Restrepo", "San Carlos Guaroa", "San Juanito", "San Luis De Cubarral", "San Martín", "Cabuyaro", "Puerto Gaitán", "Puerto Lopez"], "NARIÑO": ["Chachagui", "Consaca", "El Peñol", "El Tambo", "La Florida", "Nariño", "Pasto", "Sandoná", "Tangua", "Yacuanquer", "Ancuya", "Guaitarilla", "La Llanada", "Linares", "Los Andes", "Mallama", "Ospina", "Providencia", "Ricaurte", "Samaniego", "Santa Cruz", "Sapuyes", "Tuquerres", "Barbacoas", "El Charco", "Francisco Pizarro", "La Tola", "Magui", "Mosquera", "Olaya Herrera", "Roberto Payan", "Santa Barbara", "Tumaco", "Alban", "Arboleda", "Belen", "Buesaco", "Colon", "Cumbitara", "El Rosario", "El Tablon De Gomez", "La Cruz", "La Union", "Leiva", "Policarpa", "San Lorenzo", "San Pablo", "San Pedro De Cartago", "Taminango", "Aldana", "Contadero", "Córdoba", "Cuaspud", "Cumbal", "Funes", "Guachucal", "Gualmatan", "Iles", "Imues", "Ipiales", "Potosí", "Puerres", "Pupiales"], "NORTE DE SANTANDER": ["Arboledas", "Cucutilla", "Gramalote", "Lourdes", "Salazar", "Santiago", "Villa Caro", "Bucarasica", "El Tarra", "Sardinata", "Tibú", "Abrego", "Cachirá", "Convención", "El Carmen", "Hacarí", "La Esperanza", "La Playa", "Ocaña", "San Calixto", "Teorama", "Cúcuta", "El Zulia", "Los Patios", "Puerto Santander", "San Cayetano", "Villa Del Rosario", "Cácota", "Chitagá", "Mutiscua", "Pamplona", "Pamplonita", "Silos", "Bochalema", "Chinácota", "Durania", "Herrán", "Labateca", "Ragonvalia", "Toledo"], "PUTUMAYO": ["Colón", "Mocoa", "Orito", "Puerto Asis", "Puerto Caicedo", "Puerto Guzman", "Puerto Leguizamo", "San Francisco", "San Miguel", "Santiago", "Sibundoy", "Valle Del Guamuez", "Villa Garzon"], "QUINDIO": ["Armenia", "Buenavista", "Calarca", "Cordoba", "Genova", "Pijao", "Filandia", "Salento", "Circasia", "La Tebaida", "Montengro", "Quimbaya"], "RISARALDA": ["Dosquebradas", "La Virginia", "Marsella", "Pereira", "Santa Rosa De Cabal", "Apía", "Balboa", "Belén De Umbría", "Guática", "La Celia", "Quinchia", "Santuario", "Mistrató", "Pueblo Rico"], "SANTANDER": ["Chima", "Confines", "Contratación", "El Guacamayo", "Galán", "Gambita", "Guadalupe", "Guapotá", "Hato", "Oiba", "Palmar", "Palmas Del Socorro", "Santa Helena Del Opón", "Simacota", "Socorro", "Suaita", "Capitanejo", "Carcasí", "Cepitá", "Cerrito", "Concepción", "Enciso", "Guaca", "Macaravita", "Málaga", "Molagavita", "San Andrés", "San José De Miranda", "San Miguel", "Aratoca", "Barichara", "Cabrera", "Charalá", "Coromoro", "Curití", "Encino", "Jordán", "Mogotes", "Ocamonte", "Onzaga", "Páramo", "Pinchote", "San Gil", "San Joaquín", "Valle De San José", "Villanueva", "Barrancabermeja", "Betulia", "El Carmen De Chucurí", "Puerto Wilches", "Sabana De Torres", "San Vicente De Chucurí", "Zapatoca", "Bucaramanga", "California", "Charta", "El Playón", "Floridablanca", "Girón", "Lebríja", "Los Santos", "Matanza", "Piedecuesta", "Rionegro", "Santa Bárbara", "Surata", "Tona", "Vetas", "Aguada", "Albania", "Barbosa", "Bolívar", "Chipatá", "Cimitarra", "El Peñón", "Florián", "Guavatá", "Guepsa", "Jesús María", "La Belleza", "La Paz", "Landázuri", "Puente Nacional", "Puerto Parra", "San Benito", "Sucre", "Vélez"], "SUCRE": ["Guaranda", "Majagual", "Sucre", "Chalán", "Coloso", "Morroa", "Ovejas", "Sincelejo", "Coveñas", "Palmito", "San Onofre", "Santiago De Tolú", "Tolú Viejo", "Buenavista", "Corozal", "El Roble", "Galeras", "Los Palmitos", "Sampués", "San Juan Betulia", "San Pedro", "Sincé", "Caimito", "La Unión", "San Benito Abad", "San Marcos"], "TOLIMA": ["Ambalema", "Armero", "Falan", "Fresno", "Honda", "Mariquita", "Palocabildo", "Carmen De Apicalá", "Cunday", "Icononzo", "Melgar", "Villarrica", "Ataco", "Chaparral", "Coyaima", "Natagaima", "Ortega", "Planadas", "Rioblanco", "Roncesvalles", "San Antonio", "Alvarado", "Anzoátegui", "Cajamarca", "Coello", "Espinal", "Flandes", "Ibague", "Piedras", "Rovira", "San Luis", "Valle De San Juan", "Alpujarra", "Dolores", "Guamo", "Prado", "Purificación", "Saldaña", "Suárez", "Casabianca", "Herveo", "Lerida", "Libano", "Murillo", "Santa Isabel", "Venadillo", "Villahermosa"], "VALLE DEL CAUCA": ["Andalucía", "Buga", "Bugalagrande", "Calima", "El Cerrito", "Ginebra", "Guacarí", "Restrepo", "Riofrio", "San Pedro", "Trujillo", "Tuluá", "Yotoco", "Alcala", "Ansermanuevo", "Argelia", "Bolívar", "Cartago", "El Águila", "El Cairo", "El Dovio", "La Unión", "La Victoria", "Obando", "Roldanillo", "Toro", "Ulloa", "Versalles", "Zarzal", "Buenaventura", "Caicedonia", "Sevilla", "Cali", "Candelaria", "Dagua", "Florida", "Jamundí", "La Cumbre", "Palmira", "Pradera", "Vijes", "Yumbo"], "VAUPES": ["Caruru", "Mitú", "Pacoa", "Papunahua", "Taraira", "Yavaraté"], "VICHADA": ["Cumaribo", "La Primavera", "Puerto Carreño", "Santa Rosalía"]};
+
+    function actualizarCiudades() {
+      const deptoSelect = document.getElementById("departamento");
+      const ciudadSelect = document.getElementById("ciudad");
+      const depto = deptoSelect.value;
+      const ciudades = ciudadesPorDepartamento[depto] || [];
+      ciudadSelect.innerHTML = "";
+      ciudades.forEach(ciudad => {
+        const option = document.createElement("option");
+        option.value = ciudad;
+        option.textContent = ciudad;
+        ciudadSelect.appendChild(option);
+      });
+    }
+
+    // Navegación por pasos
+    let pasoActual = 0; // 0..3
+
+    function mostrarPaso(i){
+      const pasos = document.querySelectorAll(".step");
+      const pills = document.querySelectorAll(".step-pill");
+      pasos.forEach((p, idx)=> p.classList.toggle("active", idx===i));
+      pills.forEach((pill, idx)=>{
+        pill.classList.toggle("active", idx===i);
+        pill.classList.toggle("done", idx<i);
+      });
+
+      // Botones
+      document.getElementById("btnAtras").disabled = (i===0);
+      document.getElementById("btnSiguiente").style.display = (i<3) ? "inline-block" : "none";
+      document.getElementById("btnEnviar").style.display     = (i===3) ? "inline-block" : "none";
+
+      pasoActual = i;
+      if(i===0){ actualizarCiudades(); } // asegura ciudades cargadas al volver al paso 0
+    }
+
+    function siguientePaso(){
+      const paso = document.querySelectorAll(".step")[pasoActual];
+      const requeridos = paso.querySelectorAll("[required]");
+      for (const el of requeridos){
+        if(!el.checkValidity()){ el.reportValidity(); return; }
+      }
+      if(pasoActual<3) mostrarPaso(pasoActual+1);
+    }
+    function atrasPaso(){
+      if(pasoActual>0) mostrarPaso(pasoActual-1);
+    }
+
+    // Habilitar envío sólo si acepta TyC
+    function toggleEnviar(){
+      const ok = document.getElementById("acepta_tyc").checked;
+      document.getElementById("btnEnviar").disabled = !ok;
+    }
+
+    window.addEventListener("load", ()=>{
+      actualizarCiudades();
+      mostrarPaso(0);
+      toggleEnviar();
+    });
+  </script>
 </head>
 <body>
 
-<header class="hero">
-  <div class="inner">
-    <img src="Dibujo Logo sin fondo-color.png" alt="Logo" class="brand-logo">
-    <div>
-      <h1 class="hero-title">Formulario de Registro del Proveedor</h1>
-      <p class="hero-sub">Valida tus datos y adjunta los documentos requeridos</p>
+  <!-- ===== Banner fijo independiente (no se traslada con el formulario) ===== -->
+  <header class="hero" role="banner">
+    <div class="inner">
+      <!-- Logo dentro de templates -->
+      <img src="templates/Dibujo Logo sin fondo-color.png" alt="Logo" class="brand-logo">
+      <div>
+        <h1 class="hero-title">Formulario de Registro del Proveedor</h1>
+        <p class="hero-sub">Valida tus datos y adjunta los documentos requeridos</p>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<div class="wrap">
-<form class="card" action="/registrado" method="post" enctype="multipart/form-data">
-  <div class="steps">
-    <span class="step-pill active">1. Empresa</span>
-    <span class="step-pill">2. Representante</span>
-    <span class="step-pill">3. Documentos</span>
-    <span class="step-pill">4. Revisión</span>
-  </div>
+  <!-- ===== Contenido principal ===== -->
+  <div class="wrap">
+    <form id="form-registro" class="card" action="/registrado" method="post" enctype="multipart/form-data">
+      <!-- Progreso visual -->
+      <div class="steps">
+        <span class="step-pill active">1. Empresa</span>
+        <span class="step-pill">2. Representante</span>
+        <span class="step-pill">3. Documentos</span>
+        <span class="step-pill">4. Revisión</span>
+      </div>
 
-  <!-- Paso 1 -->
-  <div class="step active">
-    <div class="card-head">Datos de la Empresa</div>
-    <div class="card-body">
-      <label>Nombre o Razón Social</label>
-      <input type="text" name="razon_social" required>
-      <label>Tipo de Documento</label>
-      <select name="tipo_documento" required>
-        <option value="NIT">NIT</option><option value="CC">Cédula de Ciudadanía</option><option value="CE">Cédula de Extranjería</option>
-      </select>
-      <label>Número de Documento</label>
-      <input type="text" name="numero_documento" required>
-      <label>Departamento</label>
-      <select name="departamento" id="departamento" onchange="actualizarCiudades()" required>
-        <!-- tus opciones originales -->
-      </select>
-      <label>Ciudad</label>
-      <select name="ciudad" id="ciudad" required></select>
-      <label>Teléfonos</label>
-      <input type="text" name="telefonos">
-      <label>Correo Electrónico</label>
-      <input type="email" name="correo">
-      <label>Tipo de Empresa</label>
-      <select name="tipo_empresa">
-        <option value="SAS">SAS</option><option value="SA">SA</option><option value="LTDA">LTDA</option>
-      </select>
-      <label>Fecha de Constitución</label>
-      <input type="date" name="fecha_constitucion">
-      <label>Código CIIU Principal</label>
-      <input type="text" name="codigo_ciiu">
-    </div>
-  </div>
+      <!-- ================= Paso 1: Datos de la Empresa ================= -->
+      <section class="step active" aria-labelledby="titulo-step-1">
+        <div class="card-head" id="titulo-step-1">Datos de la Empresa</div>
+        <div class="card-body">
 
-  <!-- Paso 2 -->
-  <div class="step">
-    <div class="card-head">Datos del Representante Legal</div>
-    <div class="card-body">
-      <label>Primer Apellido</label><input type="text" name="primer_apellido">
-      <label>Segundo Apellido</label><input type="text" name="segundo_apellido">
-      <label>Nombres</label><input type="text" name="nombres_rl">
-      <label>Tipo de Documento</label>
-      <select name="tipo_documento_rl">
-        <option value="CC">Cédula de Ciudadanía</option><option value="CE">Cédula de Extranjería</option>
-      </select>
-      <label>Número de Documento</label><input type="text" name="numero_documento_rl">
-    </div>
-  </div>
+          <label>Nombre o Razón Social</label>
+          <input type="text" name="razon_social" required>
 
-  <!-- Paso 3 -->
-  <div class="step">
-    <div class="card-head">Carga de Documentos</div>
-    <div class="card-body">
-      <label>Cámara de Comercio</label><input type="file" name="camara_comercio" accept=".pdf,.jpg,.png">
-      <label>Documento Identidad Representante</label><input type="file" name="doc_identidad" accept=".pdf,.jpg,.png">
-      <label>Composición Accionaria</label><input type="file" name="composicion_accionaria" accept=".pdf,.jpg,.png">
-      <label>RUT</label><input type="file" name="rut" accept=".pdf,.jpg,.png">
-      <label>Autorización Datos</label><input type="file" name="autorizacion_datos" accept=".pdf,.jpg,.png">
-    </div>
-  </div>
+          <label>Tipo de Documento</label>
+          <select name="tipo_documento" required>
+            <option value="NIT">NIT</option>
+            <option value="CC">Cédula de Ciudadanía</option>
+            <option value="CE">Cédula de Extranjería</option>
+          </select>
 
-  <!-- Paso 4 -->
-  <div class="step">
-    <div class="card-head">Revisión y Aceptación</div>
-    <div class="card-body">
-      <p>Por favor confirma que toda la información es correcta y acepta los términos y condiciones.</p>
-      <label><input type="checkbox" id="acepta_tyc" onclick="toggleEnviar()"> Acepto los términos y condiciones</label>
-    </div>
-  </div>
+          <label>Número de Documento</label>
+          <input type="text" name="numero_documento" required>
 
-  <div class="actions">
-    <button type="button" id="btnAtras" class="btn btn-outline" onclick="atrasPaso()">Atrás</button>
-    <div>
-      <button type="button" id="btnSiguiente" class="btn btn-primary" onclick="siguientePaso()">Siguiente</button>
-      <button type="submit" id="btnEnviar" class="btn btn-primary" style="display:none" disabled>Enviar</button>
-    </div>
-  </div>
-</form>
-</div>
+          <label>Departamento</label>
+          <select name="departamento" id="departamento" onchange="actualizarCiudades()" required>
+            <option value="AMAZONAS">AMAZONAS</option><option value="ANTIOQUIA">ANTIOQUIA</option><option value="ARAUCA">ARAUCA</option><option value="ARCHIPIELAGO DE SAN ANDRES">ARCHIPIELAGO DE SAN ANDRES</option><option value="ATLÁNTICO">ATLÁNTICO</option><option value="BOGOTÁ D.C.">BOGOTÁ D.C.</option><option value="BOLIVAR">BOLIVAR</option><option value="BOYACÁ">BOYACÁ</option><option value="CALDAS">CALDAS</option><option value="CAQUETA">CAQUETA</option><option value="CASANARE">CASANARE</option><option value="CAUCA">CAUCA</option><option value="CESAR">CESAR</option><option value="CHOCO">CHOCO</option><option value="CORDOBA">CORDOBA</option><option value="CUNDINAMARCA">CUNDINAMARCA</option><option value="GUAINIA">GUAINIA</option><option value="GUAVIARE">GUAVIARE</option><option value="HUILA">HUILA</option><option value="LA GUAJIRA">LA GUAJIRA</option><option value="MAGDALENA">MAGDALENA</option><option value="META">META</option><option value="NARIÑO">NARIÑO</option><option value="NORTE DE SANTANDER">NORTE DE SANTANDER</option><option value="PUTUMAYO">PUTUMAYO</option><option value="QUINDIO">QUINDIO</option><option value="RISARALDA">RISARALDA</option><option value="SANTANDER">SANTANDER</option><option value="SUCRE">SUCRE</option><option value="TOLIMA">TOLIMA</option><option value="VALLE DEL CAUCA">VALLE DEL CAUCA</option><option value="VAUPES">VAUPES</option><option value="VICHADA">VICHADA</option>
+            <option value="Bogotá">Bogotá</option>
+            <option value="Antioquia">Antioquia</option>
+            <option value="Valle del Cauca">Valle del Cauca</option>
+            <option value="Atlántico">Atlántico</option>
+            <option value="Cundinamarca">Cundinamarca</option>
+          </select>
 
+          <label>Ciudad</label>
+          <select name="ciudad" id="ciudad" required></select>
+
+          <label>Teléfonos</label>
+          <input type="text" name="telefonos">
+
+          <label>Correo Electrónico</label>
+          <input type="email" name="correo">
+
+          <label>Tipo de Empresa</label>
+          <select name="tipo_empresa">
+            <option value="SAS">SAS</option>
+            <option value="SA">SA</option>
+            <option value="LTDA">LTDA</option>
+          </select>
+
+          <label>Fecha de Constitución</label>
+          <input type="date" name="fecha_constitucion">
+
+          <label>Código CIIU Principal</label>
+          <input type="text" name="codigo_ciiu">
+        </div>
+      </section>
+
+      <!-- ================= Paso 2: Representante Legal ================= -->
+      <section class="step" aria-labelledby="titulo-step-2">
+        <div class="card-head" id="titulo-step-2">Datos del Representante Legal</div>
+        <div class="card-body">
+          <label>Primer Apellido</label>
+          <input type="text" name="primer_apellido">
+
+          <label>Segundo Apellido</label>
+          <input type="text" name="segundo_apellido">
+
+          <label>Nombres</label>
+          <input type="text" name="nombres_rl">
+
+          <label>Tipo de Documento</label>
+          <select name="tipo_documento_rl">
+            <option value="CC">Cédula de Ciudadanía</option>
+            <option value="CE">Cédula de Extranjería</option>
+          </select>
+
+          <label>Número de Documento</label>
+          <input type="text" name="numero_documento_rl">
+        </div>
+      </section>
+
+      <!-- ================= Paso 3: Documentos ================= -->
+      <section class="step" aria-labelledby="titulo-step-3">
+        <div class="card-head" id="titulo-step-3">Carga de Documentos</div>
+        <div class="card-body">
+          <label>Cámara de Comercio (máx. 30 días)</label>
+          <input type="file" name="camara_comercio" accept=".pdf,.jpg,.png">
+
+          <label>Documento de Identificación del Representante Legal</label>
+          <input type="file" name="doc_identidad" accept=".pdf,.jpg,.png">
+
+          <label>Composición Accionaria</label>
+          <input type="file" name="composicion_accionaria" accept=".pdf,.jpg,.png">
+
+          <label>RUT (máx. 30 días)</label>
+          <input type="file" name="rut" accept=".pdf,.jpg,.png">
+
+          <label>Autorización Tratamiento de Datos</label>
+          <input type="file" name="autorizacion_datos" accept=".pdf,.jpg,.png">
+        </div>
+      </section>
+
+      <!-- ================= Paso 4: Revisión y aceptación ================= -->
+      <section class="step" aria-labelledby="titulo-step-4">
+        <div class="card-head" id="titulo-step-4">Revisión y Aceptación</div>
+        <div class="card-body">
+          <p>Confirma que la información es correcta y acepta los Términos y Condiciones para enviar.</p>
+          <div class="terms">
+            <input type="checkbox" id="acepta_tyc" onclick="toggleEnviar()">
+            <label for="acepta_tyc">Acepto los <a href="#" target="_blank" rel="noopener">Términos y Condiciones</a> y la <a href="#" target="_blank" rel="noopener">Política de Tratamiento de Datos</a>.</label>
+          </div>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button type="button" id="btnAtras" class="btn btn-outline" onclick="atrasPaso()">Atrás</button>
+        <div>
+          <button type="button" id="btnSiguiente" class="btn btn-primary" onclick="siguientePaso()">Siguiente</button>
+          <button type="submit" id="btnEnviar" class="btn btn-primary" style="display:none" disabled>Enviar</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </body>
 </html>
-
